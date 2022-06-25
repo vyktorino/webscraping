@@ -1,28 +1,44 @@
 import twint
 import pandas as pd
 
-c = twint.Config()
 
-c.Search = ['Rénovation énergétique']       # topic
-c.Limit = 100      # number of Tweets to scrape
-c.Lang ="fr"
+class TwitterCrawl:
+    def __init__(self):
+        pass
 
+    def get_scrape(self) -> pd.DataFrame:
+        """Returns the dataframe from the scrape
 
-c.Pandas = True
-c.Hide_output = True
-# c.Near = "Paris"
-# c.Store_csv = True       # store tweets in a csv file
-# c.Output = "renov.csv"     # path to csv file
+        Args:
+            None
 
-twint.run.Search(c)
+        Returns:
+            scrape_df (pd.DataFrame): scraped dataframe with keep columns
+        """
+
+        c = twint.Config()
+
+        topic_for_search = ["Rénovation énergétique"]
+        c.Search = topic_for_search
+        c.Limit = 100  # number of Tweets to scrape
+        c.Lang = "fr"
+
+        c.Pandas = True
+        c.Hide_output = True
+        # c.Near = "Paris"
+
+        twint.run.Search(c)
+
 
 def column_names():
-  return twint.output.panda.Tweets_df.columns
+    return twint.output.panda.Tweets_df.columns
+
 
 def twint_to_pd(columns):
-  return twint.output.panda.Tweets_df[columns]
+    return twint.output.panda.Tweets_df[columns]
 
-keep_columns = ["id","date","place","near","geo"]
+
+keep_columns = ["id", "date", "place", "near", "geo"]
 data = twint_to_pd(keep_columns)
 print(data.head())
 
