@@ -1,4 +1,8 @@
 import datetime
+import sys
+
+sys.path.insert(0, r"c:\\Users\\space\\nebula\\webscraping\\src\\database")
+
 
 import pytz
 import twint
@@ -7,8 +11,9 @@ import pandas as pd
 from pytz import timezone
 from datetime import datetime as dt
 from datetime import date, timedelta
-from webscraping.src.database import host_engine
+
 from topic_search import topic_for_search
+from src.database import host_engine
 
 
 class ClassTwitterCrawl:
