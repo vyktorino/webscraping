@@ -10,3 +10,5 @@ engine = create_engine(
 
 # declare mapping
 Base = declarative_base()
+
+myvar = 1
