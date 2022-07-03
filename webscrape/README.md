@@ -1,18 +1,22 @@
 # webscraping
+
 Crawl throught the net to collect information on some trends
 
-# Initialisation
+## Initialisation
+
 Scrape Twitter data with Python [Source 1](https://www.natasshaselvaraj.com/how-to-scrape-twitter/) 
 
-# Configuration
+## Configuration
 
 1. [Download](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019) `Microsoft C++ Build Tools`, and select `C++` as language support
 2. Install the `twint` module by: `pip3 install --user --upgrade git+https://github.com/twintproject/twint.git@origin/master#egg=twint` ([source](https://github.com/twintproject/twint/issues/915#issuecomment-896612605))
 
-# Project Structure
+## Project Structure
+
 The project is currently structured into `src` and `notebooks` folders. In each directory, the scripts are classified into the functionality to which they contribute. 
 
-# Functionalities:
+## Functionalities:
+
 1. Database creation for tweet storage from search
 2. Spatial distribution of tweets
 3. Time series of tweets

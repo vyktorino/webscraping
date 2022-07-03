@@ -10,10 +10,10 @@ from datetime import date, timedelta
 
 from topic_search import topic_for_search
 
-from . import host_engine
+from host_engine import engine
 
 
-class ClassTwitterCrawl:
+class ClassTwitterScrape:
     def __init__(self):
         pass
 
@@ -41,7 +41,7 @@ class ClassTwitterCrawl:
 
         c.Since = week_ago  # researches up to a week ago until now
 
-        c.Limit = 100  # number of Tweets to scrape
+        c.Limit = 1000  # number of Tweets to scrape
         c.Lang = "fr"  # search for french text
         c.Pandas = True
         c.Hide_output = True
@@ -49,11 +49,11 @@ class ClassTwitterCrawl:
         twint.run.Search(c)
 
         webscrape_df = twint.output.panda.Tweets_df
-        print(webscrape_df.columns)
+        webscrape_df['date'] = pd.to_datetime(webscrape_df['date'])
 
         keep_columns = ["id", "user_id", "username", "date", "tweet"]
         webscrape_df[keep_columns].to_sql(
-            "Tweets", host_engine.engine, if_exists="append"
+            "Tweets", engine, if_exists="append"
         )  # send new dataframe to sql engine
 
     def fetch_dataframe(self) -> pd.DataFrame():
@@ -66,10 +66,11 @@ class ClassTwitterCrawl:
             (pd.DataFrame) : Tweets dataframe from host.engine
         """
 
-        return pd.read_sql("select * from Tweets", host_engine.engine).drop(
+        return pd.read_sql("select * from Tweets", engine).drop(
             columns="index"
         )
 
 
 if __name__ == "__main__":
-    pass
+    Scrape = ClassTwitterScrape()
+    Scrape.webscrape()
