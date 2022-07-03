@@ -1,6 +1,0 @@
-{
-    "python.analysis.autoSearchPaths": true,
-    "python.analysis.extraPaths": [
-        "./webscraping/",
-    ]
-}
