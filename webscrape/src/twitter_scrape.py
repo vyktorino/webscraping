@@ -10,7 +10,7 @@ from datetime import date, timedelta
 
 from topic_search import topic_for_search
 
-from host_engine import engine
+from engine.host_engine import engine
 
 
 class ClassTwitterScrape:

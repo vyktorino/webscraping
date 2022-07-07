@@ -3,7 +3,7 @@ from datetime import datetime
 
 import pandas as pd
 
-from twitter_scrape import ClassTwitterScrape
+from src.twitter_scrape import ClassTwitterScrape
 Scrape = ClassTwitterScrape()
 
 tweets_df = Scrape.fetch_dataframe()
