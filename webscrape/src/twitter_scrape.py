@@ -1,16 +1,11 @@
-import datetime
-
-import pytz
 import twint
 import pandas as pd
 
 from pytz import timezone
 from datetime import datetime as dt
-from datetime import date, timedelta
+from datetime import timedelta
 
-from topic_search import topic_for_search
-
-from engine.host_engine import engine
+from src.topic_search import topic_for_search
 
 
 class ClassTwitterScrape:
@@ -52,9 +47,9 @@ class ClassTwitterScrape:
         webscrape_df['date'] = pd.to_datetime(webscrape_df['date'])
 
         keep_columns = ["id", "user_id", "username", "date", "tweet"]
-        webscrape_df[keep_columns].to_sql(
-            "Tweets", engine, if_exists="append"
-        )  # send new dataframe to sql engine
+
+        file_name = open('tweets.csv', 'a+')
+        keep_columns.to_csv(file_name, sep='\t', encoding='utf-8')
 
     def fetch_dataframe(self) -> pd.DataFrame():
         """Returns the dataframe accessed on SQL
@@ -66,10 +61,7 @@ class ClassTwitterScrape:
             (pd.DataFrame) : Tweets dataframe from host.engine
         """
 
-        return pd.read_sql("select * from Tweets", engine).drop(
-            columns="index"
-        )
-
+        pd.read_csv('tweets.csv', sep='\t', header=0)
 
 if __name__ == "__main__":
     Scrape = ClassTwitterScrape()
