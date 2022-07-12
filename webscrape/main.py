@@ -21,12 +21,12 @@ if __name__ == '__main__':
     # tweets_df['session'] = (tweets_df.sort_values('date')['date'].transform(lambda x: (x.diff() > '00:05:00').cumsum()))
 
     # create a list of 5 min intervals from the start of df
-    start = tweets_df.iloc[0, 'date']
-    end = tweets_df.iloc[-1, 'date']
-    interval = (end - start)
-
-    x = start, end, interval
-    print(x)
+    # start = tweets_df.iloc[0, 'date']
+    # end = tweets_df.iloc[-1, 'date']
+    # interval = (end - start)
+    #
+    # x = start, end, interval
+    # print(x)
     print(tweets_df)
     app.run(host="127.0.0.1", port=8080, debug=True)
 

@@ -17,7 +17,7 @@ def fetch_dataframe() -> pd.DataFrame():
         (pd.DataFrame) : Tweets dataframe from host.engine
     """
     try:
-        df = pd.read_csv('tweets.csv', sep='\t', header=0)
+        df = pd.read_csv('tweets.csv', sep='\t', names=["id", "user_id", "username", "date", "tweet"])
     except:
         df = pd.DataFrame()
     return df
@@ -60,10 +60,12 @@ class ClassTwitterScrape:
 
         webscrape_df = twint.output.panda.Tweets_df
         webscrape_df['date'] = pd.to_datetime(webscrape_df['date'])
-
+        webscrape_df['tweet'] = webscrape_df['tweet'].map(lambda x: x.encode('unicode-escape').decode('utf-8'))
+        webscrape_df['username'] = webscrape_df['username'].map(lambda x: x.encode('unicode-escape').decode('utf-8'))
         keep_columns = ["id", "user_id", "username", "date", "tweet"]
 
+        webscrape_df = webscrape_df[keep_columns]
         file_name = open('tweets.csv', 'a+')
-        keep_columns.to_csv(file_name, sep='\t', encoding='utf-8')
+        webscrape_df.to_csv(file_name, sep='\t', header=False)
 
 
