@@ -8,9 +8,24 @@ from datetime import timedelta
 from src.topic_search import topic_for_search
 
 
+def fetch_dataframe() -> pd.DataFrame():
+    """Returns the dataframe accessed on SQL
+
+    Args:
+
+    Returns:
+        (pd.DataFrame) : Tweets dataframe from host.engine
+    """
+    try:
+        df = pd.read_csv('tweets.csv', sep='\t', header=0)
+    except:
+        df = pd.DataFrame()
+    return df
+
+
 class ClassTwitterScrape:
     def __init__(self):
-        pass
+        self.webscrape()
 
     def webscrape(self) -> None:
         """Webscrapes
@@ -51,18 +66,4 @@ class ClassTwitterScrape:
         file_name = open('tweets.csv', 'a+')
         keep_columns.to_csv(file_name, sep='\t', encoding='utf-8')
 
-    def fetch_dataframe(self) -> pd.DataFrame():
-        """Returns the dataframe accessed on SQL
 
-        Args:
-            None
-
-        Returns:
-            (pd.DataFrame) : Tweets dataframe from host.engine
-        """
-
-        pd.read_csv('tweets.csv', sep='\t', header=0)
-
-if __name__ == "__main__":
-    Scrape = ClassTwitterScrape()
-    Scrape.webscrape()

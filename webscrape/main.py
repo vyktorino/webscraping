@@ -1,6 +1,6 @@
 import pandas as pd
 from flask import Flask
-from src.twitter_scrape import ClassTwitterScrape
+from src.twitter_scrape import ClassTwitterScrape, fetch_dataframe
 
 
 app = Flask(__name__)
@@ -14,7 +14,7 @@ def index():
 if __name__ == '__main__':
     Scrape = ClassTwitterScrape()
 
-    tweets_df = Scrape.fetch_dataframe()
+    tweets_df = fetch_dataframe()
 
     tweets_df['date'] = pd.to_datetime(tweets_df['date'])
     # create a session for every 5 min
@@ -27,5 +27,6 @@ if __name__ == '__main__':
 
     x = start, end, interval
     print(x)
+    print(tweets_df)
     app.run(host="127.0.0.1", port=8080, debug=True)
 
