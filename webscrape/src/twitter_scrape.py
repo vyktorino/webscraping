@@ -60,7 +60,7 @@ class ClassTwitterScrape:
 
         webscrape_df = twint.output.panda.Tweets_df
         webscrape_df['date'] = pd.to_datetime(webscrape_df['date'])
-        webscrape_df['tweet'] = webscrape_df['tweet'].map(lambda x: x.encode('unicode-escape').decode('utf-8'))
+        webscrape_df['tweet'] = webscrape_df['tweet'].map(lambda x: x.encode('unicode-escape').decode('utf-8')) # TODO: fix the accents and french language stuff
         webscrape_df['username'] = webscrape_df['username'].map(lambda x: x.encode('unicode-escape').decode('utf-8'))
         keep_columns = ["id", "user_id", "username", "date", "tweet"]
 
